@@ -1,16 +1,15 @@
-# lib
+アプリ概要
 
-A new Flutter project.
+アプリ名：仮想通貨情報収集アプリ
 
-## Getting Started
+アプリの目的：仮想通貨の価格をリアルタイムに表示し、チャットを介してユーザー間で情報のやり取りを行う。
 
-This project is a starting point for a Flutter application.
+アプリの主な機能：
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+①:現在(リアルタイム)の仮想通貨の価格を表示させ、一定時間毎に更新する(1秒毎や5秒毎など)
+②:価格が変動した際の現在と過去の価格の差を表示
+③:過去から現在までの価格の変遷を一定期間毎にグラフで表示(24時間、1週間、1カ月、1年など)
+④:価格の変動があった際に通知する(6時間毎など)
+⑤:ホーム画面を設定する(ログイン・ログアウト、設定、ユーザー情報の項目を用意)
+⑥:ユーザーの情報を記録、保存、更新できるようにする(ユーザー名、パスワード、メールアドレス)
+⑦チャット機能(ユーザー同士で情報のやり取りを行う)
