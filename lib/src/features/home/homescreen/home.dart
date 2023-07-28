@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'login.dart';
+import 'package:lib/src/features/home/account/login.dart';
 import 'userinfo.dart';
-import 'logout.dart';
+import 'package:lib/src/features/home/account/logout.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
