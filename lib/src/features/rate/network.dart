@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
             future: futureAlbum,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return Text(snapshot.data!.parameter['ask']!);
+                return Text(snapshot.data!.data.first['ask']);
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }
