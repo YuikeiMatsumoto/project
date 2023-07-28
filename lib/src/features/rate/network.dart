@@ -19,7 +19,7 @@ Future<Album> fetchAlbum() async {
 
 class Album {
   final int status;
-  List<Map<String, String>> data;
+  List data;
   late Map<String, String> parameter = data.elementAt(0);
   final String responsetime;
 
