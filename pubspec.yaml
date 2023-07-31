@@ -41,6 +41,8 @@ dependencies:
   go_router: ^9.0.3
   fl_chart: ^0.63.0
   web_socket_channel: ^2.4.0
+  shared_preferences: ^2.2.0
+  flutter_secure_storage: ^8.0.0
 
 dev_dependencies:
   flutter_test:
