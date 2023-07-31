@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lib/src/features/home/homescreen/home.dart';
 
 class login extends StatelessWidget {
   const login({Key? key}) : super(key: key);
@@ -26,6 +27,21 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leadingWidth: 100,  //leadingWidthを設定する
+        leading: TextButton(
+          child: Text(
+            'ホームに戻る',
+            style: TextStyle(
+              color: Colors.white,  //文字の色を白にする
+              fontWeight: FontWeight.bold,  //文字を太字する
+              fontSize: 12.0,  //文字のサイズを調整する
+            ),
+          ),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()),);
+          },
+        ),
+        centerTitle: true,
         title: Text('ログイン'),
       ),
       body: Center(
