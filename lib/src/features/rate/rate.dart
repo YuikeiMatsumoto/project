@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'page1.dart';
-import 'page2.dart';
-import 'page3.dart';
-import 'page4.dart';
-
 class RateScreen extends StatelessWidget {
   RateScreen({Key? key}) : super(key: key);
 
