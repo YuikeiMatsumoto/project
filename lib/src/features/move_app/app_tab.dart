@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'home.dart';
-import 'graph.dart';
-import 'rate.dart';
-import 'chat.dart';
+import 'package:lib/src/features/home/homescreen/home.dart';
+import 'package:lib/src/features/rate/graph.dart';
+import 'package:lib/src/features/rate/rate.dart';
+import 'package:lib/src/features/chat/chat.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
