@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lib/src/features/move_app/app_tab.dart';
+import 'create_account.dart';
 
 class login extends StatelessWidget {
   const login({Key? key}) : super(key: key);
@@ -77,6 +78,13 @@ class _MainPageState extends State<MainPage> {
                 child: ElevatedButton(
                     onPressed: (){},
                     child: const Text('ログイン')
+                ),
+              ),
+              Center(
+                child: ElevatedButton(
+                  child: const Text('アカウント作成'), onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => createAccount()),);
+                  },
                 ),
               ),
             ],
