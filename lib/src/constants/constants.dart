@@ -19,4 +19,10 @@ Map<String, String> v = {
   'da' : 'data',
   're' : 'responsetime',
   'co' : 'GMO coin data',
+  'Ca' : 'アカウント作成',
+  'An' : 'アカウント名',
+  'Ma' : 'メールアドレス',
+  'Pa' : 'パスワード',
+  'Pc' : 'パスワード(確認用)',
+  'Fi' : '完了',
 };
