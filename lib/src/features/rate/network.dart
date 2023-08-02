@@ -3,12 +3,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
-const GMOApiRoute = 'https://api.coin.z.com/public';
+import 'package:lib/src/constants/constants.dart';
 
 Future<Album> fetchAlbum() async {
-  final responseBTC = await http
-      .get(Uri.parse('$GMOApiRoute/v1/ticker?symbol=BTC'));
+  final responseBTC = await http.get(Uri.parse(v['BTC'].toString()));
 
   if (responseBTC.statusCode == 200) {
     return Album.fromJson(jsonDecode(responseBTC.body));
@@ -37,16 +35,14 @@ class Album {
   }
 }
 
-void main() => runApp(const MyApp());
-
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class network extends StatefulWidget {
+  const network({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<network> createState() => _networkState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _networkState extends State<network> {
   late Future<Album> futureAlbum;
 
   @override
@@ -59,25 +55,24 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'GMO coin data',
+      title: v['co'].toString(),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('GMO coin data'),
+          title: Text(v['co'].toString()),
         ),
         body: Center(
           child: FutureBuilder<Album>(
             future: futureAlbum,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return Text(snapshot.data!.data.first['ask']);
+                return Text(snapshot.data!.data.first['last']);
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }
-
               // By default, show a loading spinner.
               return const CircularProgressIndicator();
             },
