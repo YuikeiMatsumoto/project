@@ -1,4 +1,4 @@
- enum CurrentCryptoCurrenciesSpotTrading {
+enum CurrentCryptoCurrenciesSpotTrading {
    bitcoin(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=BTC'),
    ethereum(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=ETH'),
    bitcoinCash(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=BCH'),
