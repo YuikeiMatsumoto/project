@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lib/src/constants/constants.dart';
 import 'package:lib/src/features/home/account/account_storage.dart';
-import 'package:lib/src/features/home/homescreen/home.dart';
+import 'package:lib/src/features/move_app/app_tab.dart';
 
 class createAccount extends StatefulWidget {
   const createAccount({Key? key}) : super(key: key);
@@ -102,8 +102,6 @@ class _createAccountState extends State<createAccount> {
                         passwordText = _PassController.text;
                         passwordForConfirmText = _CheckController.text;
 
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) => HomeScreen()),);
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text(createdAccountNotice,
@@ -111,6 +109,10 @@ class _createAccountState extends State<createAccount> {
                               duration: Duration(seconds: 3),
                             ),
                           );
+                        Future.delayed(Duration(seconds: 3), () {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => MyApp()),);
+                        });
                       },
                       child: const Padding(
                         padding: EdgeInsets.symmetric(vertical: 20.0),
