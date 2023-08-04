@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:lib/src/features/home/homescreen/home.dart';
-import 'package:lib/src/features/rate/graph.dart';
 import 'package:lib/src/features/rate/rate.dart';
 import 'package:lib/src/features/chat/chat.dart';
 
@@ -12,7 +11,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter app',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -31,7 +29,6 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static final _screens = [
     const HomeScreen(),
-    const GraphScreen(),
     RateScreen(),
     const ChatScreen(),
   ];
@@ -44,7 +41,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    List tabName = ['ホーム', 'グラフ', 'レート', 'チャット'];
+    List tabName = ['ホーム', 'レート', 'チャット'];
     return Scaffold(
         body: _screens[_selectedIndex],
         bottomNavigationBar: BottomNavigationBar(
@@ -52,7 +49,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           onTap: _onItemTapped,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: const Icon(Icons.home), label: tabName[0]),
-            BottomNavigationBarItem(icon: const Icon(Icons.auto_graph), label: tabName[1]),
             BottomNavigationBarItem(icon: const Icon(Icons.rate_review), label: tabName[2]),
             BottomNavigationBarItem(icon: const Icon(Icons.chat), label: tabName[3]),
           ],
