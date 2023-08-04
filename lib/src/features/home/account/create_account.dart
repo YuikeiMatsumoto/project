@@ -97,13 +97,20 @@ class _createAccountState extends State<createAccount> {
                         await _secureStorage.setMail(_MailController.text);
                         await _secureStorage.setPass(_PassController.text);
                         await _secureStorage.setCheck(_CheckController.text);
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()),);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(v['Cm'].toString(), textAlign: TextAlign.center),
-                            duration: const Duration(seconds: 3),
-                          ),
-                        );
+                        v['Name'] = _NameController.text;
+                        v['Mail'] = _MailController.text;
+                        v['Pass'] = _PassController.text;
+                        v['Check'] = _CheckController.text;
+
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => HomeScreen()),);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(v['Cm'].toString(),
+                                  textAlign: TextAlign.center),
+                              duration: const Duration(seconds: 3),
+                            ),
+                          );
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20.0),
