@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lib/src/constants/constants.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -8,10 +9,10 @@ class ChatScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('チャット'),
+        title: const Text(chatScreenTabName),
       ),
       body: const Center(
-          child: Text('チャット', style: TextStyle(fontSize: 32.0))),
+          child: Text(chatScreenTabName, style: TextStyle(fontSize: 32.0))),
     );
   }
 }
