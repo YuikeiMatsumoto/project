@@ -6,7 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:lib/src/constants/constants.dart';
 
 Future<Album> fetchAlbum() async {
-  final responseBTC = await http.get(Uri.parse(v['BTC'].toString()));
+  final responseBTC = await http.get(
+      Uri.parse(CurrentCryptoCurrenciesSpotTrading.bitcoin.URL));
 
   if (responseBTC.statusCode == 200) {
     return Album.fromJson(jsonDecode(responseBTC.body));
@@ -17,7 +18,7 @@ Future<Album> fetchAlbum() async {
 
 class Album {
   final int status;
-  List data;
+  final List data;
   final String responsetime;
 
   Album({
@@ -55,21 +56,19 @@ class _networkState extends State<network> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: v['co'].toString(),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(v['co'].toString()),
         ),
         body: Center(
           child: FutureBuilder<Album>(
             future: futureAlbum,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return Text(snapshot.data!.data.first['last']);
+                return Text(snapshot.data!.data.first[lastTradedPrice]);
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }
