@@ -1,25 +1,25 @@
 enum CurrentCryptoCurrenciesSpotTrading {
-  bitcoin(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=BTC'),
-  ethereum(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=ETH'),
-  bitcoinCash(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=BCH'),
-  litecoin(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=LTC'),
-  ripple(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=XRP');
+   bitcoin(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=BTC'),
+   ethereum(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=ETH'),
+   bitcoinCash(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=BCH'),
+   litecoin(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=LTC'),
+   ripple(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=XRP');
 
-  const CurrentCryptoCurrenciesSpotTrading({required this.URL});
+   const CurrentCryptoCurrenciesSpotTrading({required this.URL});
 
-  final String URL;
+   final String URL;
 }
 
 enum CurrentCryptoCurrenciesLeveragedTrading {
-  bitcoinPerJPY(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=BTC_JPY'),
-  ethereumPerJPY(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=ETH_JPY'),
-  bitcoinCashPerJPY(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=BCH_JPY'),
-  litecoinPerJPY(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=LTC_JPY'),
-  ripplePerJPY(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=XRP_JPY');
+   bitcoinPerJPY(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=BTC_JPY'),
+   ethereumPerJPY(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=ETH_JPY'),
+   bitcoinCashPerJPY(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=BCH_JPY'),
+   litecoinPerJPY(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=LTC_JPY'),
+   ripplePerJPY(URL: 'https://api.coin.z.com/public/v1/ticker?symbol=XRP_JPY');
 
-  const CurrentCryptoCurrenciesLeveragedTrading({required this.URL});
+   const CurrentCryptoCurrenciesLeveragedTrading({required this.URL});
 
-  final String URL;
+   final String URL;
 }
 
 enum CryptoCurrenciesName {
@@ -62,8 +62,7 @@ const String deletedAccountButton = 'アカウント削除';
 const String createdAccountNotice = 'アカウントを作成しました';
 const String differencePasswordNotice = 'パスワードが一致しません';
 const String notFinishedInputNotice = '入力が完了していない項目があります';
-String accountNameText = '_NameController.text';
-String mailAddressText = '_MailController.text';
-String passwordText = '_PassController.text';
-String passwordForConfirmText = '_CheckController.text';
-late String currentLastValue = 'snapshot.data!.data.first[lastTradedPrice]';
+      String accountNameText = '_NameController.text';
+      String mailAddressText = '_MailController.text';
+      String passwordText = '_PassController.text';
+      String passwordForConfirmText = '_CheckController.text';
