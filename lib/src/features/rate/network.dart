@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lib/src/constants/constants.dart';
 
-Future<Album> fetchAlbum() async {
-  final responseBTC = await http.get(Uri.parse(v['BTC'].toString()));
+Stream<Album> fetchAlbum() async* {
+  final responseBTC = await http.get(
+      Uri.parse(CurrentCryptoCurrenciesSpotTrading.bitcoin.URL));
 
   if (responseBTC.statusCode == 200) {
-    return Album.fromJson(jsonDecode(responseBTC.body));
+    yield Album.fromJson(jsonDecode(responseBTC.body));
   } else {
     throw Exception('Failed to load album');
   }
@@ -17,7 +18,7 @@ Future<Album> fetchAlbum() async {
 
 class Album {
   final int status;
-  List data;
+  final List data;
   final String responsetime;
 
   Album({
@@ -28,48 +29,50 @@ class Album {
 
   factory Album.fromJson(Map<String, dynamic> json) {
     return Album(
-      status: json['status'],
-      data: json['data'],
-      responsetime: json['responsetime'],
+      status: json[jsonKeyNameStatus],
+      data: json[jsonKeyNameData],
+      responsetime: json[jsonKeyNameResponseTime],
     );
   }
 }
 
 class network extends StatefulWidget {
-  const network({super.key});
+  network({super.key});
+
+  String? currentLastValue;
 
   @override
   State<network> createState() => _networkState();
 }
 
 class _networkState extends State<network> {
-  late Future<Album> futureAlbum;
+  late Stream<Album> streamAlbum;
 
   @override
   void initState() {
     super.initState();
-    futureAlbum = fetchAlbum();
+    streamAlbum = fetchAlbum();
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: v['co'].toString(),
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(v['co'].toString()),
         ),
         body: Center(
-          child: FutureBuilder<Album>(
-            future: futureAlbum,
+          child: StreamBuilder<Album>(
+            stream: streamAlbum,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return Text(snapshot.data!.data.first['last']);
+                currentLastValue = snapshot.data!.data.first[lastTradedPrice];
+                debugPrint(currentLastValue.toString());
+                return Text(currentLastValue.toString());
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }
