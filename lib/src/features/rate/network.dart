@@ -6,11 +6,12 @@ import 'package:http/http.dart' as http;
 import 'package:lib/src/constants/constants.dart';
 
 Future<Album> fetchAlbum() async {
+
   final responseBTC = await http.get(
       Uri.parse(CurrentCryptoCurrenciesSpotTrading.bitcoin.URL));
 
   if (responseBTC.statusCode == 200) {
-    return Album.fromJson(jsonDecode(responseBTC.body));
+    yield Album.fromJson(jsonDecode(responseBTC.body));
   } else {
     throw Exception('Failed to load album');
   }
@@ -29,15 +30,17 @@ class Album {
 
   factory Album.fromJson(Map<String, dynamic> json) {
     return Album(
-      status: json['status'],
-      data: json['data'],
-      responsetime: json['responsetime'],
+      status: json[jsonKeyNameStatus],
+      data: json[jsonKeyNameData],
+      responsetime: json[jsonKeyNameResponseTime],
     );
   }
 }
 
 class network extends StatefulWidget {
-  const network({super.key});
+  network({super.key});
+
+  String? currentLastValue;
 
   @override
   State<network> createState() => _networkState();
@@ -49,7 +52,7 @@ class _networkState extends State<network> {
   @override
   void initState() {
     super.initState();
-    futureAlbum = fetchAlbum();
+    streamAlbum = fetchAlbum();
   }
 
   @override
@@ -64,11 +67,13 @@ class _networkState extends State<network> {
           centerTitle: true,
         ),
         body: Center(
-          child: FutureBuilder<Album>(
-            future: futureAlbum,
+          child: StreamBuilder<Album>(
+            stream: streamAlbum,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return Text(snapshot.data!.data.first[lastTradedPrice]);
+                currentLastValue = snapshot.data!.data.first[lastTradedPrice];
+                debugPrint(currentLastValue.toString());
+                return Text(currentLastValue.toString());
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }
