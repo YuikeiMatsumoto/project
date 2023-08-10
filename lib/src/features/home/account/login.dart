@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lib/src/features/move_app/app_tab.dart';
 import 'create_account.dart';
+import 'package:lib/src/constants/constants.dart';
 
 class login extends StatelessWidget {
   const login({Key? key}) : super(key: key);
@@ -8,10 +9,10 @@ class login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData.light(),
-        title: 'ログイン',
-        home: MainPage(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.light(),
+      title: loginText,
+      home: MainPage(),
     );
   }
 }
@@ -30,8 +31,8 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         leadingWidth: 100,  //leadingWidthを設定する
         leading: TextButton(
-          child: Text(
-            'ホームに戻る',
+          child: const Text(
+            backHomeTabButton,
             style: TextStyle(
               color: Colors.white,  //文字の色を白にする
               fontWeight: FontWeight.bold,  //文字を太字する
@@ -39,11 +40,12 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => MyApp()),);
+            Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const MyApp()),);
           },
         ),
         centerTitle: true,
-        title: Text('ログイン'),
+        title: const Text(loginText),
       ),
       body: Center(
         child: Container(
@@ -52,10 +54,11 @@ class _MainPageState extends State<MainPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 8, vertical: 16),
                 child: TextFormField(
                   decoration: const InputDecoration(
-                    labelText: 'ユーザー名を入力してください',
+                    labelText: inputUserName,
                   ),
                 ),
               ),
@@ -64,7 +67,7 @@ class _MainPageState extends State<MainPage> {
                 child: TextFormField(
                   obscureText: _isObscure,
                   decoration: InputDecoration(
-                      labelText: 'パスワードを入力してください',
+                      labelText: inputPassword,
                       suffixIcon: IconButton(
                           icon: Icon(_isObscure ? Icons.visibility_off : Icons.visibility),
                           onPressed: () {
@@ -77,14 +80,14 @@ class _MainPageState extends State<MainPage> {
               Center(
                 child: ElevatedButton(
                     onPressed: (){},
-                    child: const Text('ログイン')
+                    child: const Text(loginText)
                 ),
               ),
               Center(
                 child: ElevatedButton(
-                  child: const Text('アカウント作成'), onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => createAccount()),);
-                  },
+                  child: const Text(createAccountText), onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const createAccount()),);
+                },
                 ),
               ),
             ],

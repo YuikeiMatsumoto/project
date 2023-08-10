@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lib/src/constants/constants.dart';
 import 'package:lib/src/features/home/account/account_storage.dart';
-import 'package:lib/src/features/home/homescreen/home.dart';
+import 'package:lib/src/features/move_app/app_tab.dart';
 
 class createAccount extends StatefulWidget {
   const createAccount({Key? key}) : super(key: key);
@@ -37,7 +37,7 @@ class _createAccountState extends State<createAccount> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(v['Ca'].toString()),
+        title: const Text(createAccountText),
       ),
       body: SafeArea(
         child: Padding(
@@ -51,9 +51,9 @@ class _createAccountState extends State<createAccount> {
                   padding: const EdgeInsets.only(top: 20),
                   child: TextFormField(
                     controller: _NameController,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      labelText: v['An'],
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: inputAccountNameForm,
                     ),
                   ),
                 ),
@@ -61,9 +61,9 @@ class _createAccountState extends State<createAccount> {
                   padding: const EdgeInsets.only(top: 20),
                   child: TextFormField(
                     controller: _MailController,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      labelText: v['Ma'],
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: inputMailAddressForm,
                     ),
                   ),
                 ),
@@ -71,9 +71,9 @@ class _createAccountState extends State<createAccount> {
                   padding: const EdgeInsets.only(top: 20),
                   child: TextFormField(
                     controller: _PassController,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      labelText: v['Pa'],
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: inputPasswordForm,
                     ),
                   ),
                 ),
@@ -81,9 +81,9 @@ class _createAccountState extends State<createAccount> {
                   padding: const EdgeInsets.only(top: 20),
                   child: TextFormField(
                     controller: _CheckController,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      labelText: v['Pc'],
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: inputPasswordForConfirmForm,
                     ),
                   ),
                 ),
@@ -97,17 +97,26 @@ class _createAccountState extends State<createAccount> {
                         await _secureStorage.setMail(_MailController.text);
                         await _secureStorage.setPass(_PassController.text);
                         await _secureStorage.setCheck(_CheckController.text);
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()),);
+                        accountNameText = _NameController.text;
+                        mailAddressText = _MailController.text;
+                        passwordText = _PassController.text;
+                        passwordForConfirmText = _CheckController.text;
+
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(v['Cm'].toString(), textAlign: TextAlign.center),
-                            duration: const Duration(seconds: 3),
+                          const SnackBar(
+                            content: Text(createdAccountNotice,
+                                textAlign: TextAlign.center),
+                            duration: Duration(seconds: 3),
                           ),
                         );
+                        Future.delayed(Duration(seconds: 3), () {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) => MyApp()),);
+                        });
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20.0),
-                        child: Text(v['Fi'].toString()),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20.0),
+                        child: Text(finishedButton),
                       ),
                     ),
                   ),

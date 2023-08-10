@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lib/src/constants/constants.dart';
+import 'package:lib/src/features/rate/network.dart';
+
+network _network = network();
 
 class RateScreen extends StatelessWidget {
   RateScreen({Key? key}) : super(key: key);
@@ -12,17 +15,13 @@ class RateScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(v['Ra'].toString()),
-          bottom: TabBar(
-            tabs: <Widget>[
-              Tab(text: v['Cr']),
-            ],
+          title: const Text(rateScreenTabName),
+          bottom: const TabBar(
+            tabs: <Widget>[Tab(text: cryptoCurrencyTabName),],
           ),
         ),
-        body: TabBarView(
-          children: <Widget>[
-            NestedTabBar(v['Cr'].toString()),
-          ],
+        body: const TabBarView(
+          children: <Widget>[NestedTabBar(cryptoCurrencyTabName),],
         ),
       ),
     );
@@ -42,13 +41,18 @@ class _NestedTabBarState extends State<NestedTabBar>
     with TickerProviderStateMixin {
   late final TabController _tabController;
 
-  List secondTabName = [v['ExAc'], v['ExLe'], v['Sa'], v['CrFX']];
-  List virtualCurrency = ['BTC', 'ETH', 'BCH', 'LTC', 'XRP'];
+  List virtualCurrency = [
+    CryptoCurrenciesName.bitcoin.Abbreviation,
+    CryptoCurrenciesName.ethereum.Abbreviation,
+    CryptoCurrenciesName.bitcoinCash.Abbreviation,
+    CryptoCurrenciesName.litecoin.Abbreviation,
+    CryptoCurrenciesName.ripple.Abbreviation
+  ];
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -67,9 +71,13 @@ class _NestedTabBarState extends State<NestedTabBar>
             color: Colors.green,
           ),
           controller: _tabController,
-          tabs: <Widget>[
-            Tab(child: Text(secondTabName[0], style: const TextStyle(color: Colors.black, fontSize: 12))),
-            Tab(child: Text(secondTabName[1], style: const TextStyle(color: Colors.black, fontSize: 12))),
+          tabs: const <Widget>[
+            Tab(child: Text(exchangeSpotTabName,
+                style: TextStyle(color: Colors.black, fontSize: 12))
+            ),
+            Tab(child: Text(exchangeLeverageTabName,
+                style: TextStyle(color: Colors.black, fontSize: 12))
+            ),
           ],
         ),
         Expanded(
@@ -77,15 +85,16 @@ class _NestedTabBarState extends State<NestedTabBar>
             controller: _tabController,
             children: <Widget>[
               ListView.separated(itemBuilder: (context, index) {
+                debugPrint(currentLastValue.toString());
                 return ListTile(title: Text(virtualCurrency[index]));
               }, separatorBuilder: (context, index) {
                 return const Divider(thickness: 1, color: Colors.black);
-                }, itemCount: virtualCurrency.length),
+              }, itemCount: virtualCurrency.length),
               ListView.separated(itemBuilder: (context, index) {
                 return ListTile(title: Text(virtualCurrency[index]));
               }, separatorBuilder: (context, index) {
                 return const Divider(thickness: 1, color: Colors.black);
-                }, itemCount: virtualCurrency.length),
+              }, itemCount: virtualCurrency.length),
             ],
           ),
         ),

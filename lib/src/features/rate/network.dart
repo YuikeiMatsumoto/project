@@ -37,9 +37,7 @@ class Album {
 }
 
 class network extends StatefulWidget {
-  network({super.key});
-
-  String? currentLastValue;
+   const network({super.key});
 
   @override
   State<network> createState() => _networkState();
@@ -47,6 +45,8 @@ class network extends StatefulWidget {
 
 class _networkState extends State<network> {
   late Stream<Album> streamAlbum;
+
+  final StreamController lastController = StreamController();
 
   @override
   void initState() {
@@ -69,12 +69,12 @@ class _networkState extends State<network> {
           child: StreamBuilder<Album>(
             stream: streamAlbum,
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
+              if (snapshot.hasError) {
+                return Text('${snapshot.error}');
+              } else if (snapshot.hasData) {
                 currentLastValue = snapshot.data!.data.first[lastTradedPrice];
                 debugPrint(currentLastValue.toString());
                 return Text(currentLastValue.toString());
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
               }
               // By default, show a loading spinner.
               return const CircularProgressIndicator();
