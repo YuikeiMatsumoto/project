@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lib/src/constants/constants.dart';
+import 'package:lib/src/features/rate/network.dart';
+
+network _network = network();
 
 class RateScreen extends StatelessWidget {
   RateScreen({Key? key}) : super(key: key);
@@ -82,15 +85,16 @@ class _NestedTabBarState extends State<NestedTabBar>
             controller: _tabController,
             children: <Widget>[
               ListView.separated(itemBuilder: (context, index) {
+                debugPrint(currentLastValue.toString());
                 return ListTile(title: Text(virtualCurrency[index]));
               }, separatorBuilder: (context, index) {
                 return const Divider(thickness: 1, color: Colors.black);
-                }, itemCount: virtualCurrency.length),
+              }, itemCount: virtualCurrency.length),
               ListView.separated(itemBuilder: (context, index) {
                 return ListTile(title: Text(virtualCurrency[index]));
               }, separatorBuilder: (context, index) {
                 return const Divider(thickness: 1, color: Colors.black);
-                }, itemCount: virtualCurrency.length),
+              }, itemCount: virtualCurrency.length),
             ],
           ),
         ),

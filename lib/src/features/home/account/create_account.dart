@@ -102,13 +102,13 @@ class _createAccountState extends State<createAccount> {
                         passwordText = _PassController.text;
                         passwordForConfirmText = _CheckController.text;
 
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text(createdAccountNotice,
-                                  textAlign: TextAlign.center),
-                              duration: Duration(seconds: 3),
-                            ),
-                          );
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(createdAccountNotice,
+                                textAlign: TextAlign.center),
+                            duration: Duration(seconds: 3),
+                          ),
+                        );
                         Future.delayed(Duration(seconds: 3), () {
                           Navigator.push(context, MaterialPageRoute(
                               builder: (context) => MyApp()),);
