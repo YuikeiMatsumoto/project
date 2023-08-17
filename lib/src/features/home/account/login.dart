@@ -87,7 +87,7 @@ class _MainPageState extends State<MainPage> {
                 child: ElevatedButton(
                   child: const Text(createAccountText), onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => const createAccount()),);
-                },
+                  },
                 ),
               ),
             ],

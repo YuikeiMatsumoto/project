@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lib/src/constants/constants.dart';
 
-Stream<Album> fetchAlbum() async* {
+Future<Album> fetchAlbum() async {
+
   final responseBTC = await http.get(
       Uri.parse(CurrentCryptoCurrenciesSpotTrading.bitcoin.URL));
 
@@ -44,7 +45,7 @@ class network extends StatefulWidget {
 }
 
 class _networkState extends State<network> {
-  late Stream<Album> streamAlbum;
+  late Future<Album> futureAlbum;
 
   final StreamController lastController = StreamController();
 
