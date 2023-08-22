@@ -69,16 +69,27 @@ class _networkState extends State<network> {
         body: Center(
           child: StreamBuilder<Album>(
             stream: streamAlbum,
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              } else if (snapshot.hasData) {
-                currentLastValue = snapshot.data!.data.first[lastTradedPrice];
-                debugPrint(currentLastValue.toString());
-                return Text(currentLastValue.toString());
+            builder: (context, AsyncSnapshot<Album> snapshot) {
+              switch(snapshot.connectionState){
+                case ConnectionState.none:
+                  return const Text(noConnection);
+
+                case ConnectionState.active:
+                case ConnectionState.waiting:
+                return const CircularProgressIndicator();
+
+                case ConnectionState.done:
+                  switch(snapshot.hasData){
+                  case true:
+                  currentLastValue = snapshot.data!.data.first[lastTradedPrice];
+                  debugPrint(currentLastValue.toString());
+                  return Text(currentLastValue.toString());
+
+                  case false:
+                  return const Text(disconnection);
+                  }
+
               }
-              // By default, show a loading spinner.
-              return const CircularProgressIndicator();
             },
           ),
         ),
