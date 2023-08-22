@@ -67,3 +67,5 @@ String mailAddressText = '_MailController.text';
 String passwordText = '_PassController.text';
 String passwordForConfirmText = '_CheckController.text';
 late String currentLastValue = 'snapshot.data!.data.first[lastTradedPrice]';
+const String noConnection = 'There is no connection!';
+const String disconnection = 'lost connection';
