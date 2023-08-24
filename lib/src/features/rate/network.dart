@@ -68,7 +68,6 @@ class _networkState extends State<network> {
                   case false:
                   return const Text(disconnection);
                   }
-
               }
             },
           ),
