@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:lib/src/constants/constants.dart';
+import 'package:lib/src/features/rate/apiConstants.dart';
 
 Future<Album> fetchAlbum() async {
 
@@ -14,26 +15,6 @@ Future<Album> fetchAlbum() async {
     yield Album.fromJson(jsonDecode(responseBTC.body));
   } else {
     throw Exception('Failed to load album');
-  }
-}
-
-class Album {
-  final int status;
-  final List data;
-  final String responsetime;
-
-  Album({
-    required this.status,
-    required this.data,
-    required this.responsetime,
-  });
-
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      status: json[jsonKeyNameStatus],
-      data: json[jsonKeyNameData],
-      responsetime: json[jsonKeyNameResponseTime],
-    );
   }
 }
 
@@ -88,7 +69,6 @@ class _networkState extends State<network> {
                   case false:
                   return const Text(disconnection);
                   }
-
               }
             },
           ),
