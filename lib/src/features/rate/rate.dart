@@ -18,6 +18,7 @@ class RateScreen extends StatelessWidget {
             tabs: <Widget>[Tab(text: cryptoCurrencyTabName),],
           ),
         ),
+        
         body: const TabBarView(
           children: <Widget>[RateTabBar(cryptoCurrencyTabName),],
         ),
