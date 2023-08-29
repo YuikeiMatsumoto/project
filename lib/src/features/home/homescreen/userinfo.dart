@@ -22,7 +22,7 @@ class userinfo extends StatelessWidget {
                 width: 300,
                 color: Colors.blue,
                 alignment: Alignment.center,
-                child: const Text(inputAccountNameForm, style: TextStyle(fontSize: 24, color: Colors.white),),
+                child: const Text(inputAccountNameForm),
               ),
               const SizedBox(height: 20.0,),
               Container(
@@ -30,9 +30,7 @@ class userinfo extends StatelessWidget {
                 width: 300,
                 color: Colors.blue,
                 alignment: Alignment.center,
-                child: Text(accountNameText,
-                  style: const TextStyle(
-                      fontSize: 24, color: Colors.white),),
+                child: Text(accountNameText),
               ),
               const SizedBox(height: 50.0,),
               Container(
@@ -40,9 +38,7 @@ class userinfo extends StatelessWidget {
                 width: 300,
                 color: Colors.green,
                 alignment: Alignment.center,
-                child: const Text(inputMailAddressForm,
-                  style: TextStyle(
-                      fontSize: 24, color: Colors.white),),
+                child: const Text(inputMailAddressForm),
               ),
               const SizedBox(height: 20.0,),
               Container(
@@ -50,9 +46,7 @@ class userinfo extends StatelessWidget {
                 width: 300,
                 color: Colors.green,
                 alignment: Alignment.center,
-                child: Text(mailAddressText,
-                  style: const TextStyle(
-                      fontSize: 24, color: Colors.white),),
+                child: Text(mailAddressText),
               ),
               const SizedBox(height: 50.0,),
               Container(
@@ -60,9 +54,7 @@ class userinfo extends StatelessWidget {
                 width: 300,
                 color: Colors.red,
                 alignment: Alignment.center,
-                child: const Text(inputPasswordForm,
-                  style: TextStyle(
-                      fontSize: 24, color: Colors.white),),
+                child: const Text(inputPasswordForm),
               ),
               const SizedBox(height: 20.0,),
               Container(
@@ -70,9 +62,7 @@ class userinfo extends StatelessWidget {
                 width: 300,
                 color: Colors.red,
                 alignment: Alignment.center,
-                child: Text(passwordText,
-                  style: const TextStyle(
-                      fontSize: 24, color: Colors.white),),
+                child: Text(passwordText),
               ),
             ],
           ),
