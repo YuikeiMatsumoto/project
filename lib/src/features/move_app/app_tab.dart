@@ -14,6 +14,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        primaryTextTheme: const TextTheme(
+          displayMedium: TextStyle(fontSize: 24, color: Colors.white),
+        )
       ),
       home: const MyStatefulWidget(),
     );
