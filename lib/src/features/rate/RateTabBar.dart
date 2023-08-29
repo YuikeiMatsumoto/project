@@ -45,11 +45,9 @@ class _RateTabBarState extends State<RateTabBar>
           ),
           controller: _tabController,
           tabs: const <Widget>[
-            Tab(child: Text(exchangeSpotTabName,
-                style: TextStyle(color: Colors.black, fontSize: 12))
+            Tab(child: Text(exchangeSpotTabName)
             ),
-            Tab(child: Text(exchangeLeverageTabName,
-                style: TextStyle(color: Colors.black, fontSize: 12))
+            Tab(child: Text(exchangeLeverageTabName)
             ),
           ],
         ),

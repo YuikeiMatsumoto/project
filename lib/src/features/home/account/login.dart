@@ -31,14 +31,7 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         leadingWidth: 100,  //leadingWidthを設定する
         leading: TextButton(
-          child: const Text(
-            backHomeTabButton,
-            style: TextStyle(
-              color: Colors.white,  //文字の色を白にする
-              fontWeight: FontWeight.bold,  //文字を太字する
-              fontSize: 12.0,  //文字のサイズを調整する
-            ),
-          ),
+          child: const Text(backHomeTabButton),
           onPressed: () {
             Navigator.push(
               context, MaterialPageRoute(builder: (context) => const MyApp()),);
