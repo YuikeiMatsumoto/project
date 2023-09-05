@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lib/src/constants/constants.dart';
 
 class logout extends StatelessWidget {
   const logout({Key? key}) : super(key: key);
@@ -8,7 +9,7 @@ class logout extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('ログアウト'),
+        title: const Text(logoutText),
       ),
     );
   }
