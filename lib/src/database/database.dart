@@ -1,38 +1,41 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:crypto/crypto.dart';
 import 'package:lib/src/constants/constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final database = openDatabase(
-    join(await getDatabasesPath(), 'app_database.db'),
+    final database = openDatabase(
+    join(await getDatabasesPath(), 'user_account_database.db'),
     onCreate: (db, version) {
       return db.execute(
-        'CREATE TABLE apps(id INTEGER PRIMARY KEY, name TEXT, pass INTEGER)',
+        'CREATE TABLE Accounts(id INTEGER PRIMARY KEY, name TEXT, mail_address TEXT, password TEXT)',
       );
     },
     version: 1,
   );
 
-  Future<void> insertApp(App app) async {
+  Future<void> insertAccount(Account account) async {
     final db = await database;
+
     await db.insert(
-      'apps',
-      app.toMap(),
+      'accounts',
+      account.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
-  Future<List<App>> apps() async {
+  Future<List<Account>> accounts() async {
     final db = await database;
 
-    final List<Map<String, dynamic>> maps = await db.query('apps');
+    final List<Map<String, dynamic>> maps = await db.query('accounts');
 
     return List.generate(maps.length, (i) {
-      return App(
+      return Account(
         id: maps[i]['id'],
         name: maps[i]['name'],
         mail_address: maps[i]['mail_address'],
@@ -41,60 +44,67 @@ void main() async {
     });
   }
 
-  Future<void> updateApp(App app) async {
+  Future<void> updateAccount(Account account) async {
     final db = await database;
 
     await db.update(
-      'apps',
-      app.toMap(),
+      'accounts',
+      account.toMap(),
       where: 'id = ?',
-      whereArgs: [app.id],
+      whereArgs: [account.id],
     );
   }
 
-  Future<void> deleteApp(int id) async {
+  Future<void> deleteAccount(int id) async {
     final db = await database;
 
     await db.delete(
-      'apps',
+      'accounts',
       where: 'id = ?',
       whereArgs: [id],
     );
   }
 
-  var fido = App(
+  var fido = Account(
     id: 0,
     name: accountNameText,
     mail_address: mailAddressText,
     password: passwordText,
   );
 
-  await insertApp(fido);
+  var bytes1 = utf8.encode(fido.name);
+  var digest1 = sha256.convert(bytes1);
+  var bytes2 = utf8.encode(fido.mail_address);
+  var digest2 = sha256.convert(bytes2);
+  var bytes3 = utf8.encode(fido.password);
+  var digest3 = sha256.convert(bytes3);
 
-  print(await apps());
+  await insertAccount(fido);
 
-  fido = App(
+  print(await accounts());
+
+  fido = Account(
     id: fido.id,
-    name: fido.name,
-    mail_address: fido.mail_address,
-    password: fido.password,
+    name: digest1.toString(),
+    mail_address: digest2.toString(),
+    password: digest3.toString(),
   );
-  await updateApp(fido);
+  await updateAccount(fido);
 
-  print(await apps());
+  print(await accounts());
 
-  await deleteApp(fido.id);
+  await deleteAccount(fido.id);
 
-  print(await apps());
+  print(await accounts());
 }
 
-class App {
+class Account {
   final int id;
   final String name;
   final String mail_address;
   final String password;
 
-  const App({
+  const Account({
     required this.id,
     required this.name,
     required this.mail_address,
@@ -112,6 +122,6 @@ class App {
 
   @override
   String toString() {
-    return 'App{id: $id, name: $name, mail_address: $mail_address, password: $password}';
+    return 'Account{id: $id, name: $name, mail_address: $mail_address, password: $password}';
   }
 }
