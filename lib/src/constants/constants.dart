@@ -69,4 +69,4 @@ String passwordForConfirmText = '_CheckController.text';
 late String currentLastValue = 'snapshot.data!.data.first[lastTradedPrice]';
 const String noConnection = 'There is no connection!';
 const String disconnection = 'lost connection';
-String pepperValue = '?T3c/UoCn7A!';
+const String pepperValue = '?T3c/UoCn7A!';
