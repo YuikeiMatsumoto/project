@@ -79,15 +79,15 @@ void main() async {
 
   var bytesName = utf8.encode(fido.name);
   var digestName = sha256.convert(bytesName);
-  var bytesHashedName = utf8.encode(saltValue + digestName.toString());
+  var bytesHashedName = utf8.encode(saltValue + digestName.toString() + pepperValue);
   var digestHashedName = sha256.convert(bytesHashedName);
   var bytesMail = utf8.encode(fido.mail_address);
   var digestMail = sha256.convert(bytesMail);
-  var bytesHashedMail = utf8.encode(saltValue + digestMail.toString());
+  var bytesHashedMail = utf8.encode(saltValue + digestMail.toString() + pepperValue);
   var digestHashedMail = sha256.convert(bytesHashedMail);
   var bytesPass = utf8.encode(fido.password);
   var digestPass = sha256.convert(bytesPass);
-  var bytesHashedPass = utf8.encode(saltValue + digestPass.toString());
+  var bytesHashedPass = utf8.encode(saltValue + digestPass.toString() + pepperValue);
   var digestHashedPass = sha256.convert(bytesHashedPass);
 
   await insertAccount(fido);
