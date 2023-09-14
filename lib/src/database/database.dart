@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:crypto/crypto.dart';
+import 'package:crypt/crypt.dart';
 import 'package:lib/src/constants/constants.dart';
 
 void main() async {
@@ -72,12 +73,22 @@ void main() async {
     password: passwordText,
   );
 
-  var bytes1 = utf8.encode(fido.name);
-  var digest1 = sha256.convert(bytes1);
-  var bytes2 = utf8.encode(fido.mail_address);
-  var digest2 = sha256.convert(bytes2);
-  var bytes3 = utf8.encode(fido.password);
-  var digest3 = sha256.convert(bytes3);
+  var randomSalt = Crypt.sha256(fido.name);
+  debugPrint(randomSalt.toString());
+  var saltValue = randomSalt.toString().runes.map((v) => String.fromCharCode(v ^ 2)).join();
+
+  var bytesName = utf8.encode(fido.name);
+  var digestName = sha256.convert(bytesName);
+  var bytesHashedName = utf8.encode(saltValue + digestName.toString());
+  var digestHashedName = sha256.convert(bytesHashedName);
+  var bytesMail = utf8.encode(fido.mail_address);
+  var digestMail = sha256.convert(bytesMail);
+  var bytesHashedMail = utf8.encode(saltValue + digestMail.toString());
+  var digestHashedMail = sha256.convert(bytesHashedMail);
+  var bytesPass = utf8.encode(fido.password);
+  var digestPass = sha256.convert(bytesPass);
+  var bytesHashedPass = utf8.encode(saltValue + digestPass.toString());
+  var digestHashedPass = sha256.convert(bytesHashedPass);
 
   await insertAccount(fido);
 
@@ -85,9 +96,9 @@ void main() async {
 
   fido = Account(
     id: fido.id,
-    name: digest1.toString(),
-    mail_address: digest2.toString(),
-    password: digest3.toString(),
+    name: digestHashedName.toString(),
+    mail_address: digestHashedMail.toString(),
+    password: digestHashedPass.toString(),
   );
   await updateAccount(fido);
 
