@@ -74,7 +74,6 @@ void main() async {
   );
 
   var randomSalt = Crypt.sha256(fido.name);
-  debugPrint(randomSalt.toString());
   var saltValue = randomSalt.toString().runes.map((v) => String.fromCharCode(v ^ 2)).join();
 
   var bytesName = utf8.encode(fido.name);
