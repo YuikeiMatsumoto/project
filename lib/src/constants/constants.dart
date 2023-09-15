@@ -70,3 +70,5 @@ late String currentLastValue = 'snapshot.data!.data.first[lastTradedPrice]';
 const String noConnection = 'There is no connection!';
 const String disconnection = 'lost connection';
 const String pepperValue = '?T3c/UoCn7A!';
+const String successedLogin = 'ログイン完了';
+const String failedLogin = 'メールアドレスまたはパスワードが間違っています';
