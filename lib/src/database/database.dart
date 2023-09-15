@@ -8,6 +8,9 @@ import 'package:crypto/crypto.dart';
 import 'package:crypt/crypt.dart';
 import 'package:lib/src/constants/constants.dart';
 
+String? hashedMail;
+String? hashedPass;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
     final database = openDatabase(
@@ -73,21 +76,28 @@ void main() async {
     password: passwordText,
   );
 
-  var randomSalt = Crypt.sha256(fido.name);
-  var saltValue = randomSalt.toString().runes.map((v) => String.fromCharCode(v ^ 2)).join();
+  var randomNameSalt = Crypt.sha256(fido.name);
+  var nameSaltValue = randomNameSalt.toString().runes.map((v) => String.fromCharCode(v ^ 2)).join();
+  var randomMailSalt = Crypt.sha256(fido.mail_address);
+  var mailSaltValue = randomMailSalt.toString().runes.map((v) => String.fromCharCode(v ^ 2)).join();
+  var randomPassSalt = Crypt.sha256(fido.password);
+  var passSaltValue = randomPassSalt.toString().runes.map((v) => String.fromCharCode(v ^ 2)).join();
 
   var bytesName = utf8.encode(fido.name);
   var digestName = sha256.convert(bytesName);
-  var bytesHashedName = utf8.encode(saltValue + digestName.toString() + pepperValue);
+  var bytesHashedName = utf8.encode(nameSaltValue + digestName.toString() + pepperValue);
   var digestHashedName = sha256.convert(bytesHashedName);
   var bytesMail = utf8.encode(fido.mail_address);
   var digestMail = sha256.convert(bytesMail);
-  var bytesHashedMail = utf8.encode(saltValue + digestMail.toString() + pepperValue);
+  var bytesHashedMail = utf8.encode(mailSaltValue + digestMail.toString() + pepperValue);
   var digestHashedMail = sha256.convert(bytesHashedMail);
   var bytesPass = utf8.encode(fido.password);
   var digestPass = sha256.convert(bytesPass);
-  var bytesHashedPass = utf8.encode(saltValue + digestPass.toString() + pepperValue);
+  var bytesHashedPass = utf8.encode(passSaltValue + digestPass.toString() + pepperValue);
   var digestHashedPass = sha256.convert(bytesHashedPass);
+
+  hashedMail = digestHashedMail.toString();
+  hashedPass = digestHashedPass.toString();
 
   await insertAccount(fido);
 
