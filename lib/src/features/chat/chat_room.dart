@@ -3,19 +3,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+import 'package:lib/src/constants/constants.dart';
 
 String randomString() {
   final random = Random.secure();
   final values = List<int>.generate(16, (i) => random.nextInt(255));
   return base64UrlEncode(values);
-}
-
-void main() {
-  runApp(
-      const MaterialApp(
-        home: ChatRoom(),
-      )
-  );
 }
 
 class ChatRoom extends StatefulWidget {
@@ -26,15 +19,21 @@ class ChatRoom extends StatefulWidget {
 
 class ChatRoomState extends State<ChatRoom> {
   final List<types.Message> _messages = [];
-  final _user = const types.User(id: '82091008-a484-4a89-ae75-a22bf8d6f3ac');
+  final _user = types.User(id: randomString(), lastName: accountNameText);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Chat(
+        theme: const DefaultChatTheme(
+          primaryColor: Colors.green,
+          userAvatarNameColors: [Colors.black],
+        ),
         user: _user,
         messages: _messages,
         onSendPressed: _handleSendPressed,
+        showUserAvatars: true,
+        showUserNames: true,
       ),
     );
   }
