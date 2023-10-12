@@ -13,7 +13,7 @@ Stream<BitcoinAlbum> fetchBitcoinAlbum() async* {
   if (responseBTC.statusCode == 200) {
     yield BitcoinAlbum.fromJson(jsonDecode(responseBTC.body));
   } else {
-    throw Exception('Failed to load album');
+    throw Exception(failedLoadAlbum);
   }
 }
 
@@ -24,7 +24,7 @@ Stream<EthereumAlbum> fetchEthereumAlbum() async* {
   if (responseETH.statusCode == 200) {
     yield EthereumAlbum.fromJson(jsonDecode(responseETH.body));
   } else {
-    throw Exception('Failed to load album');
+    throw Exception(failedLoadAlbum);
   }
 }
 
@@ -35,7 +35,7 @@ Stream<BitcoinCashAlbum> fetchBitcoinCashAlbum() async* {
   if (responseBCH.statusCode == 200) {
     yield BitcoinCashAlbum.fromJson(jsonDecode(responseBCH.body));
   } else {
-    throw Exception('Failed to load album');
+    throw Exception(failedLoadAlbum);
   }
 }
 
@@ -46,7 +46,7 @@ Stream<LitecoinAlbum> fetchLitecoinAlbum() async* {
   if (responseLTC.statusCode == 200) {
     yield LitecoinAlbum.fromJson(jsonDecode(responseLTC.body));
   } else {
-    throw Exception('Failed to load album');
+    throw Exception(failedLoadAlbum);
   }
 }
 
@@ -57,7 +57,7 @@ Stream<RippleAlbum> fetchRippleAlbum() async* {
   if (responseXRP.statusCode == 200) {
     yield RippleAlbum.fromJson(jsonDecode(responseXRP.body));
   } else {
-    throw Exception('Failed to load album');
+    throw Exception(failedLoadAlbum);
   }
 }
 
@@ -74,6 +74,12 @@ class _networkState extends State<network> {
   late Stream<BitcoinCashAlbum> streamBitcoinCashAlbum;
   late Stream<LitecoinAlbum> streamLitecoinAlbum;
   late Stream<RippleAlbum> streamRippleAlbum;
+
+  late String currentLastValueBTC;
+  late String currentLastValueETH;
+  late String currentLastValueBCH;
+  late String currentLastValueLTC;
+  late String currentLastValueXRP;
 
   final StreamController lastController = StreamController();
 
@@ -111,7 +117,7 @@ class _networkState extends State<network> {
                       case ConnectionState.done:
                         switch(snapshot.hasData){
                           case true:
-                            String currentLastValueBTC = snapshot.data!.data.first[lastTradedPrice];
+                            currentLastValueBTC = snapshot.data!.data.first[lastTradedPrice];
 
                             return Text(currentLastValueBTC);
 
@@ -135,9 +141,9 @@ class _networkState extends State<network> {
                       case ConnectionState.done:
                         switch(snapshot.hasData){
                           case true:
-                            currentLastValue = snapshot.data!.data.first[lastTradedPrice];
+                            currentLastValueETH = snapshot.data!.data.first[lastTradedPrice];
 
-                            return Text(currentLastValue);
+                            return Text(currentLastValueETH);
 
                           case false:
                             return const Text(disconnection);
@@ -159,9 +165,9 @@ class _networkState extends State<network> {
                       case ConnectionState.done:
                         switch(snapshot.hasData){
                           case true:
-                            currentLastValue = snapshot.data!.data.first[lastTradedPrice];
+                            currentLastValueBCH = snapshot.data!.data.first[lastTradedPrice];
 
-                            return Text(currentLastValue);
+                            return Text(currentLastValueBCH);
 
                           case false:
                             return const Text(disconnection);
@@ -183,9 +189,9 @@ class _networkState extends State<network> {
                       case ConnectionState.done:
                         switch(snapshot.hasData){
                           case true:
-                            currentLastValue = snapshot.data!.data.first[lastTradedPrice];
+                            currentLastValueLTC = snapshot.data!.data.first[lastTradedPrice];
 
-                            return Text(currentLastValue);
+                            return Text(currentLastValueLTC);
 
                           case false:
                             return const Text(disconnection);
@@ -207,9 +213,9 @@ class _networkState extends State<network> {
                       case ConnectionState.done:
                         switch(snapshot.hasData){
                           case true:
-                            currentLastValue = snapshot.data!.data.first[lastTradedPrice];
+                            currentLastValueXRP = snapshot.data!.data.first[lastTradedPrice];
 
-                            return Text(currentLastValue);
+                            return Text(currentLastValueXRP);
 
                           case false:
                             return const Text(disconnection);
